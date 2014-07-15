@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+      
+
+<script src='assets/js/jquery-1.8.3.min.js'></script>
+<script src='assets/js/app.js'></script>
+  <script src="assets/js/jquery.slides.min.js"></script>
+  <script src="assets/js/jquery.smooth-scroll.min.js"></script>
+
+  <script>
+    $(function() {
+      $('#slides').slidesjs({
+        width: 1024,
+        height: 574
+      });
+    });
+  </script>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      positionImage();
+      window.onresize = positionImage;
+
+    })
+
+    function positionImage(){
+
+      var isiPad = navigator.userAgent.match(/iPad/i) != null;
+      var imageHeight;
+      var imageMarginTop;
+      var authorImageHeight;
+
+      if(isiPad){
+        imageHeight = 250;
+      }else{
+        if($( document ).width() < 768){
+          imageHeight = $(document).width() * .5;
+        }else if($( document ).width() < 1024){
+          imageHeight = 200;
+        }else{
+          imageHeight =300;
+        }
+      }
+
+      imageMarginTop = -imageHeight/2;
+
+      if($(document).width() * .4 > 250){
+        authorImageHeight = 250;
+      }else{
+        authorImageHeight = $(document).width() * .4;
+      }
+
+      $('.featured-img').css({'margin-top': imageMarginTop + 'px'})
+      $('.featured-img').css({'height': imageHeight + 'px'})
+      $('.featured-img-background').css({'min-height': imageHeight - 50 + 'px'})
+
+      $('.author-img').css({'height': authorImageHeight + 'px'})
+      $('.author-img').css({'top': (authorImageHeight)/2 + 'px'})
+      $('.author-img-container').css({'margin-top': -(authorImageHeight)/2 + 'px'})
+      $('.footer').css({'margin-top': 0+ 'px'})
+
+      if($( document ).width() > 768 & $( document ).width() < 1024 || isiPad){
+        $('.featured-img-background').css({'min-height': 200 + 'px'})
+        $('.table').css({'margin-top': (authorImageHeight)/3 + 'px'})
+      }else{
+        $('.footer').css({'padding-top': (authorImageHeight)/2 + 'px'})
+      }
+    };
+    </script>
+
+  <link rel='stylesheet' href='assets/css/style.css'>
+
+  <style>
+    ?{{Css}}
+      ${{Css}}
+    ?{{/Css}}
+  </style>
+
+
+</head>
+
+<body id="top">
+  <div>
+      <div style='height:2px; width:100%; background-color:#ccd9d9'></div>
+      <div style='height:2px; width:100%; background-color:#9fb7c1'></div>
+      <div class='featured-img-background'>
+      </div>
+
+      <section class="featured-img">
+
+        <svg class="svg-graphic" width="100%" height="100%" viewBox="0 0 560 645" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+          <g>
+            <clipPath id="hexagon">
+              <polygon points="270,0 0,160 0,485 270,645 560,485 560,160" />
+            </clipPath>
+          </g>
+
+          <polygon fill="#f6f5f2" points="268,0 0,158 0,483 268,644 558,483 558,158" transform="translate(0, 0)" />
+
+          <image clip-path="url(#hexagon)" height="100%" width="100%" xlink:href="assets/img/fh_logo_square.jpg" transform="scale(.85) translate(50, 50)"  preserveAspectRatio="xMidYMin slice" alt="Hello"></image>
+
+          <image style='background-image:url("assets/img/TFH_dingbat.svg")' id='featured-image-object'clip-path="url(#hexagon)" height="100%" width="100%" xlink:href="${{FeaturedImgSrc}}" transform="scale(.85) translate(50, 50)"  preserveAspectRatio="xMidYMin slice" ?{{FeaturedImgAlt}} alt="${{FeaturedImgAlt}}" ?{{/FeaturedImgAlt}}></image>
+        </svg>
+      </section>
+
+    </div>
+    <div id='article-container'>
+      <div id='title-content'>
+        <header class="header container">
+          
+          ?{{Title}}
+            <h1 class="article-title">${{Title}}</h1>
+          ?{{/Title}}
+
+          ?{{Subtitle}}
+            <div class='divider-dark'> </div>
+
+            <blockquote style='text-align:center;'>
+
+                <p>${{Subtitle}}
+
+
+            </blockquote>
+            <!--<div class='divider-dark'> </div>
+            <h3 class="article-subtitle">${{Subtitle}}</h3>-->
+          ?{{/Subtitle}}
+
+          ?{{AuthorName}}
+            <p class='by-container'>by</p>
+            <a href="#author-block" class="author-name scroll">${{AuthorName}}</a>
+          ?{{/AuthorName}}
+        </header>
+
+          <div class='foghorn-divider' id='header-divider'>
+            <div class='foghorn-divider-left'></div>
+            <div class='foghorn-divider-middle'><img src='assets/img/TFH_dingbat.svg'></img></div>
+            <div class='foghorn-divider-right'></div>
+            <div class='clear'></div>
+          </div>
+
+      </div>
+
+      <article class="article-body container">
+        ${{Body}}
+      </article>
+
+      <div class='article-end'>
+        <div class='foghorn-divider'>
+          <div class='foghorn-divider-left'></div>
+          <div class='foghorn-divider-middle'><img src='assets/img/TFH_dingbat.svg'></img></div>
+          <div class='foghorn-divider-right'></div>
+          <div class='clear'></div>
+        </div>
+        <div class='article-end-elements'>
+
+          ?{{ArticleType}}
+            <p class="article-type">${{ArticleType}}</p>
+          ?{{/ArticleType}}
+          <!--<ul>
+            <li class="url-btn" ><a title="Share this Story" href=""></a></li>
+            <li class="twitter-btn" ><a title="Tweet this Story" href=""></a></li>
+          </ul>-->
+          <div class='clear'></div>
+        </div>
+      </div>
+
+      ?{{Endnote}}
+        <blockquote class="endnote">
+          <p><em>${{Endnote}}</em></p>  
+        </blockquote>
+      ?{{/Endnote}}
+
+      ?{{Ad}}
+      <section class="ad-block container">
+        <a href="${{AdUrl}}">
+          <img src="${{AdImgSrc}}" alt="${{AdAlt}}"></a>
+      </section>
+      ?{{/Ad}}
+
+      <div class='spacer'>
+      </div>
+
+      ?{{AuthorImg}}
+      <div class='author-img-container'>
+        <div class="author-img">
+          <svg class="graphic" width="100%" height="100%" viewBox="0 0 560 645" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+            <g>
+              <clipPath id="hexagon">
+                <polygon points="270,0 0,160 0,485 270,645 560,485 560,160" />
+              </clipPath>
+            </g>
+
+            <polygon fill="#f6f5f2" points="268,0 0,158 0,483 268,644 558,483 558,158" transform="translate(0, 0)" />
+
+            <image clip-path="url(#hexagon)" height="100%" width="100%" xlink:href="${{AuthorImg}}" transform="scale(.85) translate(50, 50)"  preserveAspectRatio="xMidYMin slice">
+          </svg>
+        </div>
+      </div>
+      ?{{/AuthorImg}}
+
+    </div> <!--end of article-container class -->
+
+    <footer class="footer container clearfix" id="author-block">
+      
+      <div class='author-content'>
+        ?{{AuthorName}}
+          <h4 class="author-name">${{AuthorName}}</h4>
+        ?{{/AuthorName}}
+
+        ?{{AuthorBio}}    
+          <p class="author-bio">${{AuthorBio}}</p>
+        ?{{/AuthorBio}}    
+        
+        <div class='clear'></div>
+      </div>
+      <div class='table-container'>
+        <div class='table'>
+          <ul class="author-social">
+            ?{{AuthorWebsite}}
+              <li><a class="ss-icon ss-link" title="Author's Website" href="${{AuthorWebsite}}"></a></li>
+            ?{{/AuthorWebsite}}
+
+            ?{{AuthorTwitter}}
+              <li><a class="ss-icon ss-twitter" title="Author's Twitter Account" href="${{AuthorTwitter}}"></a></li>
+            ?{{/AuthorTwitter}}
+
+            ?{{AuthorAppnet}}
+              <li><a class="ss-icon ss-appdotnet" title="Author's App.net Account" href="${{AuthorAppnet}}"></a></li>
+            ?{{/AuthorAppnet}}
+
+            ?{{AuthorFacebook}}
+              <li><a class="ss-icon ss-facebook" title="Author's Facebook Account" href="${{AuthorFacebook}}"></a></li>
+            ?{{/AuthorFacebook}}
+          </ul>
+        <div>
+      </div>
+      <div class="clearfix"></div>
+    <!-- <a class="scroll back-to-top full-bleed" href="#top">Back to top</a> -->
+
+    </footer>
+
+  </body>
+
+  </html>
